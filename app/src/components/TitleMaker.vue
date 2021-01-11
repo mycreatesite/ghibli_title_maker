@@ -1,86 +1,97 @@
 <template>
-  <div class="content">
+  <div class="appContent">
     <div class="inputArea">
       <div class="inputField">
         <form name="form1">
           <div class="inputGroup">
-            <input required type="text" class="titleInput" placeholder="タイトルその1" id="title1" name="title1">
-            <input required type="text" class="titleInput" placeholder="タイトルその2" id="title2">
+            <input v-model='newTitle.val1' required type="text" class="titleInput" placeholder="タイトルその1" id="title1" name="title1">
+            <input v-model='newTitle.val2' required type="text" class="titleInput" placeholder="タイトルその2" id="title2">
           </div>
           <div class="buttonGroup">
-            <button type="button" id="submit" @click='submit'>登録する</button>
-            <button type="button" id="reset" @click='reset'>クリア</button>
+            <button type="button" id="submit" @click='submit(); focus()'>登録する</button>
+            <button type="button" id="reset" @click='reset(); focus()'>クリア</button>
           </div>
         </form>
       </div>
       <div class="shuffleButtonField">
-        <button type="button" id="shuffle" @click='shuffle'>シャッフル！</button>
+        <button type="button" id="shuffle" @click='shuffle'>シャッフルする！</button>
       </div>
     </div>
     <div class="resultArea">
       <div class="outputField">
-        <div id="outputList1" class="outputList"></div>
-        <div id="outputList2" class="outputList"></div>
+        <div id="outputList1" class="outputList"> 
+          <p v-for='item in titleList' :key="item">{{item.val1}}</p>
+        </div>
+        <div id="outputList1" class="outputList">
+          <p v-for='item in titleList' :key="item">{{item.val2}}</p>
+        </div>
       </div>
       <div class="shuffledField">
-        <p id="shuffledItem1" class="shuffledItem"></p>
-        <p id="shuffledItem2" class="shuffledItem"></p>
+        <p id="shuffledItem1" class="shuffledItem">{{getShuffledTitle.val1}}</p>
+        <p id="shuffledItem2" class="shuffledItem">{{getShuffledTitle.val2}}</p>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+
 export default {
   name: 'TitleMaker',
-  methods: {
-    submit(){
-      const input = document.querySelectorAll('.titleInput');
-      const output = document.querySelectorAll('.outputList');
-      if(!input[0].value || !input[1].value) {
-        alert(`両方入力せーや`);
-      } else {
-        for( let i = 0; i <= this.length - 1 ; i++ ) {
-          const val = input[i].value;
-          this.titleList[i].push(val);
-          const p = document.createElement('p');
-          p.textContent = val;
-          output[i].appendChild(p);
-          input[i].value = '';
-        }
-      }
-      document.form1.title1.focus();
-      console.log(this.titleList)
-    },
-    reset(){
-      const input = document.querySelectorAll('.titleInput');
-      const output = document.querySelectorAll('.outputList');
-      const shuffledItem = document.querySelectorAll('.shuffledItem');
-      for( let i = 0; i <= this.length - 1 ; i++ ) {
-        this.titleList[i] = [];
-        output[i].innerHTML = '';
-        input[i].value = '';
-        shuffledItem[i].textContent = ''
-      }
-      document.form1.title1.focus();
-      console.log(this.titleList)
-    },
-    shuffle(){
-      const shuffledItem = document.querySelectorAll('.shuffledItem');
-      for( let i = 0; i <= this.length - 1 ; i++ ) {
-        shuffledItem[i].textContent = this.titleList[i][Math.floor(Math.random() * this.titleList[i].length)];
-      }
+  data(){
+    return {
+      newTitle: {},
+      titleList: [],
+      shuffledTitle: {}
     }
   },
+  components: {
+    // HelloWorld
+  },
+  methods: {
+    submit(){
+      if(!this.newTitle.val1 || !this.newTitle.val2) {
+        alert(`ちゃんと両方入力せーや`);
+      } else {
+        const titleSet = {
+          val1: this.newTitle.val1,
+          val2: this.newTitle.val2
+        }
+        this.titleList.push(titleSet);
+        this.newTitle = {};
+      }
+    },
+    reset(){
+      this.titleList = [];
+      this.shuffledTitle = []
+    },
+    shuffle(){
+      const titleList = [this.titleList.map((obj) => obj.val1), this.titleList.map((obj) => obj.val2)];
+      this.shuffledTitle.val1 = titleList[0][Math.floor(Math.random() * titleList[0].length)]
+      this.shuffledTitle.val2 = titleList[1][Math.floor(Math.random() * titleList[1].length)]
+    },
+    focus(){
+      document.form1.title1.focus();
+    }
+  },
+  computed: {
+    getShuffledTitle(){
+      return this.shuffledTitle;
+    }
+  }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
+<style scoped lang='scss'>
+button,input {
+  font-family: 'Noto Sans JP', sans-serif;
+}
 button {
   padding: 1rem;
 }
-
+.appContent {
+  margin-bottom: 5rem;
+}
 .inputGroup {
   input {
     padding: 1.25rem;
@@ -100,15 +111,19 @@ button {
   }
 }
 .resultArea {
+  font-family: 'Potta One', cursive;
   display: flex;
   margin-top: 3rem;
+  border-radius: 10px;
+  overflow: hidden;
   .outputField, .shuffledField {
+    padding: 5rem 1rem;
     flex: 0 0 50%;
     min-height: 50vh;
+    word-break: break-word;
   }
   .outputField {
     display: flex;
-    padding: 5rem 1rem;
     background-color: #f7f7f7;
     .outputList {
       flex: 0 0 50%;
@@ -125,7 +140,6 @@ button {
       margin-bottom: 0;
       padding: 1rem 2rem;
       border-bottom: 4px dashed #eaeaea;
-      word-break: break-word;
     }
   }
   .shuffledField {
