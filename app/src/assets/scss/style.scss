@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Potta+One&display=swap');
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+.container {
+  width: calc(100% - 5vw);
+  margin: 0 auto;
+}
+#app {
+  font-family: 'Potta One', cursive;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+button {
+  padding: 1rem;
+}
+
+.inputGroup {
+  input {
+    padding: 1.25rem;
+    margin: 1rem .5rem;
+    min-width: 25%;
+  }
+}
+.buttonGroup {
+  button {
+    width: 25%;
+    margin: 1rem .5rem;
+  }
+}
+.shuffleButtonField {
+  button {
+    width: calc(50% + 1rem);
+  }
+}
+.resultArea {
+  display: flex;
+  margin-top: 3rem;
+  .outputField, .shuffledField {
+    flex: 0 0 50%;
+    min-height: 50vh;
+  }
+  .outputField {
+    display: flex;
+    padding: 5rem 1rem;
+    background-color: #f7f7f7;
+    .outputList {
+      flex: 0 0 50%;
+      text-align: left;
+      padding: 0 .75rem;
+      &:first-of-type {
+        text-align: right;
+      }
+    }
+    p {
+      font-size: 1.75rem;
+      font-weight: bold;
+      margin-top: 0;
+      margin-bottom: 0;
+      padding: 1rem 2rem;
+      border-bottom: 4px dashed #eaeaea;
+      word-break: break-word;
+    }
+  }
+  .shuffledField {
+    padding-top: 5rem;
+    border: 10px solid #f7f7f7;
+    p {
+      margin-top: 0;
+      margin-bottom: 2rem;
+      font-size: 4rem;
+    }
+  }
+}
