@@ -14,12 +14,17 @@ export default {
 <style scoped lang='scss'>
 @use '../assets/scss/variables.scss';
 .mainImage {
+  display: none;
   position: fixed;
   z-index: -1;
   left: 0;
   top: 0;
-  width: 40%;
+  width: 37%;
+  min-width: 430px;
   height: 100vh;
+  @include variables.mq(md){
+    display: block;
+  }
   img {
     width: 100%;
     height: 100%;

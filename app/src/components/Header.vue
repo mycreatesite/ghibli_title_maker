@@ -24,7 +24,8 @@ export default {
   top: 2rem;
   right: variables.$pd-right;
   img {
-    width: 70px;
+    width: 6vw;
+    min-width: 70px;
     height: auto;
   }
 }

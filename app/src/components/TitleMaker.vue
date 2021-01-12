@@ -73,7 +73,7 @@ export default {
     },
     shuffle(){
       const titleList = [this.titleList.map((obj) => obj.val1), this.titleList.map((obj) => obj.val2)];
-      this.shuffledTitle = randomFactory(titleList[0],0) + '　' + randomFactory(titleList[1],1);
+      this.shuffledTitle = randomFactory(titleList[0],0) + ' ' + randomFactory(titleList[1],1);
       function randomFactory(el,index){
         return el[Math.floor(Math.random() * titleList[index].length)]
       }
@@ -101,18 +101,33 @@ button,input {
   cursor: pointer;
 }
 .appContent {
+  position: relative;
+  padding-top: 8rem;
+  @include variables.mq(md){
+    padding-top: 6.5rem;
+  }
   &::before {
+    position: absolute;
+    top: 0;
+    left: 50%;
     content: '';
     width: 1px;
     height: 5rem;
     display: block;
-    margin: 0 auto 1.5rem;
     background-color: variables.$secondary;
+    animation: fadeIn .7s cubic-bezier(0.16, 1, 0.3, 1) 2s backwards;
+    @keyframes fadeIn {
+      0% {
+        height: 0;
+      }
+    }
   }
 }
 .outline {
   font-weight: 700;
   font-size: 1.25rem;
+  margin-top: 0;
+	margin-bottom: 2rem;
 }
 .inputGroup {
   input {
@@ -133,10 +148,13 @@ button,input {
 }
 .shuffleButtonField {
   #shuffle {
-    width: 50%;
+    width: 100%;
     background-color: variables.$secondary;
     color: #fff;
     margin: 1.5rem 0;
+    @include variables.mq(md){
+      width: 50%;
+    }
   }
 }
 .resultArea {
@@ -147,12 +165,12 @@ button,input {
     word-break: break-word;
   }
   .outputField,.shuffledField {
-    display: flex;
     background-color: #fff;
     box-shadow: 10px 10px 20px rgba(#000,.04);
   }
   .outputField {
-    padding: 2.5rem 0;
+		display: flex;
+    padding: 2.5rem 1.5rem;
     .outputList {
       flex: 0 0 50%;
       text-align: left;
@@ -170,11 +188,12 @@ button,input {
     }
   }
   .shuffledField {
-    padding: 5rem .75rem;
+    padding: 5rem 1.5rem;
     p {
       margin-top: 0;
-      margin-bottom: 2rem;
+      margin-bottom: 0;
       font-size: 2.5rem;
+			text-align: center;
     }
   }
 }

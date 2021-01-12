@@ -16,27 +16,43 @@ body {
   letter-spacing: .05em;
   line-height: 1.75;
   background-color: #FCFCFC;
+  animation: fadeIn 2s ease 0s backwards;
+  @keyframes fadeIn {
+    0% {
+      opacity: 0
+    }
+  }
 }
 
 .l-main {
-  display: flex;
+  @include variables.mq(md){
+    display: flex;
+  }
 }
 .container {
-  margin-left: auto;
-  padding-right: variables.$pd-right;
-  padding-left: 2.5rem;
-  flex: 0 0 60%;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  @include variables.mq(md){
+    flex: 0 0 60%;
+    margin-left: auto;
+    padding-right: variables.$pd-right;
+    padding-left: 2.5rem;
+  }
 }
 
 .row {
-  margin-left: -.5rem;
-  margin-right: -.5rem;
-  display: flex;
-  flex-wrap: wrap;
+  @include variables.mq(md){
+    margin-left: -.5rem;
+    margin-right: -.5rem;
+    display: flex;
+    flex-wrap: wrap;
+  }
 }
 
 .col {
-  padding-left: .5rem;
-  padding-right: .5rem;
-  flex: 1 0 50%;
+  padding: .5rem 0;
+  @include variables.mq(md){
+    padding: 0 .5rem;
+    flex: 1 0 50%;
+  }
 }
