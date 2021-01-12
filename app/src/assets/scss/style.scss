@@ -1,24 +1,42 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500&family=Potta+One&display=swap');
+@use './variables';
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@600;700;900&display=swap');
+
 * {
   box-sizing: border-box;
 }
+
 body {
   margin: 0;
-}
-.container {
-  width: calc(100% - 5vw);
-  margin: 0 auto;
-}
-#app {
-  font-family: 'Noto Sans JP', sans-serif;
+  color: variables.$secondary;
+  font-family: 'Noto Serif JP', serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  font-weight: 600;
+  letter-spacing: .05em;
+  line-height: 1.75;
+  background-color: #FCFCFC;
 }
 
-h1 {
-  font-family: 'Potta One', cursive;
-  font-size: 4rem;
+.l-main {
+  display: flex;
+}
+.container {
+  margin-left: auto;
+  padding-right: variables.$pd-right;
+  padding-left: 2.5rem;
+  flex: 0 0 60%;
+}
+
+.row {
+  margin-left: -.5rem;
+  margin-right: -.5rem;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.col {
+  padding-left: .5rem;
+  padding-right: .5rem;
+  flex: 1 0 50%;
 }

@@ -1,14 +1,19 @@
 <template>
-  <div class="container">
-    <h1>ジブリタイトルめ～か～</h1>
-    <TitleMaker/>
-    <Footer/>
-  </div>
+  <main class="l-main">
+    <MainImage/>
+    <div class="container">
+      <Header/>
+      <TitleMaker/>
+      <Footer/>
+    </div>
+  </main>
 </template>
 
 <script>
 import TitleMaker from './components/TitleMaker.vue'
+import Header from './components/Header.vue'
 import Footer from './components/Footer.vue'
+import MainImage from './components/MainImage.vue'
 
 export default {
   name: 'App',
@@ -22,6 +27,8 @@ export default {
   },
   components: {
     TitleMaker,
+    MainImage,
+    Header,
     Footer
   },
   methods: {
@@ -59,5 +66,6 @@ export default {
 </script>
 
 <style lang='scss'>
+@use './assets/scss/variables.scss';
 @use './assets/scss/style.scss';
 </style>
