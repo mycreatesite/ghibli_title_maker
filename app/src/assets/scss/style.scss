@@ -25,14 +25,14 @@ body {
 }
 
 .l-main {
-  @include variables.mq(md){
+  @include variables.mq(lg){
     display: flex;
   }
 }
 .container {
   padding-right: 1rem;
   padding-left: 1rem;
-  @include variables.mq(md){
+  @include variables.mq(lg){
     flex: 0 0 60%;
     margin-left: auto;
     padding-right: variables.$pd-right;
@@ -41,7 +41,7 @@ body {
 }
 
 .row {
-  @include variables.mq(md){
+  @include variables.mq(lg){
     margin-left: -.5rem;
     margin-right: -.5rem;
     display: flex;
@@ -51,7 +51,7 @@ body {
 
 .col {
   padding: .5rem 0;
-  @include variables.mq(md){
+  @include variables.mq(lg){
     padding: 0 .5rem;
     flex: 1 0 50%;
   }

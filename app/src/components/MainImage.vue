@@ -22,7 +22,7 @@ export default {
   width: 37%;
   min-width: 430px;
   height: 100vh;
-  @include variables.mq(md){
+  @include variables.mq(lg){
     display: block;
   }
   img {

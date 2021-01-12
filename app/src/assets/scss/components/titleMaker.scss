@@ -15,7 +15,7 @@ button,input {
 .appContent {
   position: relative;
   padding-top: 8rem;
-  @include variables.mq(md){
+  @include variables.mq(lg){
     padding-top: 6.5rem;
   }
   &::before {
@@ -64,7 +64,7 @@ button,input {
     background-color: variables.$secondary;
     color: #fff;
     margin: 1.5rem 0;
-    @include variables.mq(md){
+    @include variables.mq(lg){
       width: 50%;
     }
   }
