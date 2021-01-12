@@ -34,7 +34,9 @@
         <button type="button" id="shuffle" @click='shuffle'>シャッフルする！</button>
       </div>
       <div class="shuffledField">
-        <p id="shuffledItem" class="shuffledItem">{{getShuffledTitle}}</p>
+        <transition>
+          <p v-if='isShuffled' id="shuffledItem" class="shuffledItem">{{getShuffledTitle}}</p>
+        </transition>
       </div>
     </div>
   </div>
@@ -48,7 +50,8 @@ export default {
     return {
       newTitle: {},
       titleList: [],
-      shuffledTitle: ''
+      shuffledTitle: '',
+      isShuffled: false
     }
   },
   components: {
@@ -70,10 +73,12 @@ export default {
     reset(){
       this.titleList = [];
       this.shuffledTitle = ''
+      this.isShuffled = false;
     },
     shuffle(){
       const titleList = [this.titleList.map((obj) => obj.val1), this.titleList.map((obj) => obj.val2)];
       this.shuffledTitle = randomFactory(titleList[0],0) + ' ' + randomFactory(titleList[1],1);
+      this.isShuffled = true;
       function randomFactory(el,index){
         return el[Math.floor(Math.random() * titleList[index].length)]
       }
@@ -91,110 +96,5 @@ export default {
 </script>
 
 <style scoped lang='scss'>
-@use '../assets/scss/variables.scss';
-button,input {
-  font-family: 'Noto Sans JP', sans-serif;
-  padding: 1.2rem;
-  font-size: 1rem;
-  font-weight: 600;
-  border: none;
-  cursor: pointer;
-}
-.appContent {
-  position: relative;
-  padding-top: 8rem;
-  @include variables.mq(md){
-    padding-top: 6.5rem;
-  }
-  &::before {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    content: '';
-    width: 1px;
-    height: 5rem;
-    display: block;
-    background-color: variables.$secondary;
-    animation: fadeIn .7s cubic-bezier(0.16, 1, 0.3, 1) 2s backwards;
-    @keyframes fadeIn {
-      0% {
-        height: 0;
-      }
-    }
-  }
-}
-.outline {
-  font-weight: 700;
-  font-size: 1.25rem;
-  margin-top: 0;
-	margin-bottom: 2rem;
-}
-.inputGroup {
-  input {
-    width: 100%;
-    border-radius: 0.25rem;
-    border: 2px solid #dbdbdb;
-  }
-}
-.buttonGroup {
-  margin-top: 1rem;
-  button {
-    width: 100%;
-  }
-  #submit {
-    background-color: variables.$primary;
-    color: #fff;
-  }
-}
-.shuffleButtonField {
-  #shuffle {
-    width: 100%;
-    background-color: variables.$secondary;
-    color: #fff;
-    margin: 1.5rem 0;
-    @include variables.mq(md){
-      width: 50%;
-    }
-  }
-}
-.resultArea {
-  margin-top: 3rem;
-  .outputField, .shuffledField {
-    flex: 0 0 50%;
-    min-height: 25vh;
-    word-break: break-word;
-  }
-  .outputField,.shuffledField {
-    background-color: #fff;
-    box-shadow: 10px 10px 20px rgba(#000,.04);
-  }
-  .outputField {
-		display: flex;
-    padding: 2.5rem 1.5rem;
-    .outputList {
-      flex: 0 0 50%;
-      text-align: left;
-      padding: 0 .75rem;
-      &:first-of-type {
-        text-align: right;
-      }
-    }
-    p {
-      color: variables.$primary;
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin-top: 0;
-      margin-bottom: 0;
-    }
-  }
-  .shuffledField {
-    padding: 5rem 1.5rem;
-    p {
-      margin-top: 0;
-      margin-bottom: 0;
-      font-size: 2.5rem;
-			text-align: center;
-    }
-  }
-}
+@use '../assets/scss/components/titleMaker';
 </style>
