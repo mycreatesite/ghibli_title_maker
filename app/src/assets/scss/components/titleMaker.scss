@@ -1,5 +1,12 @@
 @use '../variables.scss';
 
+button {
+  transition: opacity .3s;
+  &:hover {
+    opacity: .7;
+  }
+}
+
 button,input {
   font-family: 'Noto Sans JP', sans-serif;
   padding: 1.2rem;
@@ -45,7 +52,7 @@ button,input {
   input {
     width: 100%;
     border-radius: 0.25rem;
-    border: 2px solid #dbdbdb;
+    border: 2px solid variables.$gray-300;
   }
 }
 .buttonGroup {
@@ -56,6 +63,9 @@ button,input {
   #submit {
     background-color: variables.$primary;
     color: #fff;
+  }
+  #reset {
+    background-color: variables.$gray-300;
   }
 }
 .shuffleButtonField {
