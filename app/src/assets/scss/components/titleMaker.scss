@@ -133,3 +133,44 @@ button,input {
     }
   }
 }
+
+.resultArea, .inputArea {
+  position: relative;
+  &::before, &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: scaleX(0);
+    transform-origin: right;
+    background-color: variables.$gray-100;
+    animation: slideIn 1s cubic-bezier(0.87, 0, 0.13, 1) 0s backwards;
+    @keyframes slideIn {
+      0% {
+        transform: scaleX(1);
+      }
+    }
+  }
+}
+
+.resultArea, .inputArea {
+  &::before {
+    animation-delay: .15s;
+    background-color: rgba(variables.$gray-100, .7);
+  }
+}
+
+@include variables.mq(lg){
+  .resultArea, .inputArea {
+    &::before, &::after {
+      animation-delay: 2.5s;
+    }
+  }
+  .resultArea, .inputArea {
+    &::before {
+      animation-delay: 2.65s;
+    }
+  }
+}
