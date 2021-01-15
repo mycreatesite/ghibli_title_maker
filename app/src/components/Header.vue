@@ -21,11 +21,11 @@ export default {
 @use '../assets/scss/variables.scss';
 .header {
   position: absolute;
-  top: 2rem;
+  top: 1rem;
   right: variables.$pd-right;
   img {
-    width: 6vw;
-    min-width: 70px;
+    width: calc(70px + 2vw);
+    max-width: 110px;
     height: auto;
   }
 }
