@@ -96,24 +96,39 @@ button,input {
     .outputList {
       flex: 0 0 50%;
       text-align: left;
-      padding: 0 .75rem;
-      &:first-of-type {
-        text-align: right;
+      padding: 0 0 0 .75rem;
+      list-style: none;
+      margin: 0;
+      &.list1 {
+        padding: 0 .75rem 0 0;
+        border-right: 2px solid variables.$gray-100;
+        @include variables.mq(lg){
+          padding: 0 1rem;
+          text-align: right;
+        }
+      }
+      &.list2 {
+        padding: 0 0 0 .75rem;
+        @include variables.mq(lg){
+          padding: 0 1rem;
+        }
       }
     }
-    p {
+    li {
       color: variables.$primary;
       font-size: 1.5rem;
       font-weight: 700;
       margin-top: 0;
       margin-bottom: 0;
-      animation: fadeIn .5s ease-out 0s backwards;
-      @keyframes fadeIn {
-        0% {
-          opacity: 0
-        }
-      }
+      transition: all 0.5s ease-in-out;
     }
+    .v-enter-from,
+    .v-leave-to {
+      opacity: 0;
+      transform: translateX(-.5rem);
+    }
+    
+
   }
   .shuffledField {
     padding: 5rem 1.5rem;
@@ -123,9 +138,7 @@ button,input {
       font-size: 2.5rem;
       font-weight: 900;
       text-align: center;
-    }
-    .v-enter-active {
-      transition: opacity 1.5s;
+      transition: opacity 0.5s ease-in-out;
     }
     .v-enter-from,
     .v-leave-to {

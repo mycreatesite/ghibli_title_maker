@@ -23,19 +23,19 @@
     </div>
     <div class="resultArea">
       <div class="outputField">
-        <div id="outputList1" class="outputList">
-          <p v-for='item in titleList' :key="item">{{item.val1}}</p>
-        </div>
-        <div id="outputList1" class="outputList">
-          <p v-for='item in titleList' :key="item">{{item.val2}}</p>
-        </div>
+        <transition-group tag="ul" class="outputList list1">
+          <li v-for='item in titleList' :key="item">{{item.val1}}</li>
+        </transition-group>
+        <transition-group tag="ul" class="outputList list2">
+          <li v-for='item in titleList' :key="item">{{item.val2}}</li>
+        </transition-group>
       </div>
       <div class="shuffleButtonField">
         <button type="button" id="shuffle" @click='shuffle'>シャッフルする！</button>
       </div>
       <div class="shuffledField">
         <transition>
-          <p v-if='isShuffled' id="shuffledItem" class="shuffledItem">{{getShuffledTitle}}</p>
+          <p v-if='isShuffled' id="shuffledItem" class="shuffledItem">{{shuffledTitle}}</p>
         </transition>
       </div>
     </div>
@@ -54,9 +54,6 @@ export default {
       isShuffled: false
     }
   },
-  components: {
-    // HelloWorld
-  },
   methods: {
     submit(){
       if(!this.newTitle.val1 || !this.newTitle.val2) {
@@ -66,30 +63,25 @@ export default {
           val1: this.newTitle.val1,
           val2: this.newTitle.val2
         }
-        this.titleList.push(titleSet);
+        this.titleList.unshift(titleSet);
         this.newTitle = {};
       }
     },
     reset(){
       this.titleList = [];
-      this.shuffledTitle = ''
+      this.shuffledTitle = '';
       this.isShuffled = false;
     },
     shuffle(){
-      const titleList = [this.titleList.map((obj) => obj.val1), this.titleList.map((obj) => obj.val2)];
-      this.shuffledTitle = randomFactory(titleList[0],0) + ' ' + randomFactory(titleList[1],1);
+      const eachTitleArray = [this.titleList.map((obj) => obj.val1), this.titleList.map((obj) => obj.val2)];
+      this.shuffledTitle = randomFactory(eachTitleArray[0]) + ' ' + randomFactory(eachTitleArray[1]);
       this.isShuffled = true;
-      function randomFactory(el,index){
-        return el[Math.floor(Math.random() * titleList[index].length)]
+      function randomFactory(array){
+        return array[Math.floor(Math.random() * array.length)]
       }
     },
     focus(){
       document.form1.title1.focus();
-    }
-  },
-  computed: {
-    getShuffledTitle(){
-      return this.shuffledTitle;
     }
   }
 }
