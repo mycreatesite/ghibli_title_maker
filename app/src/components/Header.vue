@@ -8,12 +8,7 @@
 
 <script>
 export default {
-  name: 'Header',
-  computed: {
-    getYear(){
-      return new Date().getFullYear();
-    }
-  }
+  name: 'Header'
 }
 </script>
 
